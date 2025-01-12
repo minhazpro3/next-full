@@ -1,16 +1,26 @@
 import Link from "next/link";
 import React from "react";
 
-const Page = () => {
+const getAllPost = async () => {
+   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+   const data = await res.json();
+  return data;
+};
+const PostPage = async () => {
+ const posts = await getAllPost()
+  console.log(posts);
+   
+
+  
   return (
     <div className="grid grid-cols-4 gap-4 my-4">
-      {blogs?.map((blog) => (
-        <div className="border-gray-900 border-2 p-4" key={blog.slug}>
+      {posts?.map((blog) => (
+        <div className="border-gray-900 border-2 p-4" key={blog.id}>
           <h4 className="text-xl font-medium py-2">{blog.title}</h4>
-          <h4>{blog.description}</h4>
+          <h4>{blog.body}</h4>
           <button className="border-2 border-red-600 px-6 py-2 rounded-lg my-2">
             {" "}
-            <Link href={`/blogs/${blog.slug}`}>Details</Link>{" "}
+            <Link href={`/blogs/${blog.id}`}>Details</Link>{" "}
           </button>
         </div>
       ))}
@@ -80,4 +90,4 @@ const blogs = [
   },
 ];
 
-export default Page;
+export default PostPage;
