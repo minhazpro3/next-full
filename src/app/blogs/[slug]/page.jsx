@@ -2,15 +2,17 @@ import Link from "next/link";
 import React from "react";
 
 const Page = async ({ params }) => {
-  const slug = (await params).id;
-  const { title, body } =  blogs.find((blog) => blog.id === slug);
+  const id = (await params).slug;
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+
+  const { title, body } = await res.json();
+
+  // const { title, body } =  blogs.find((blog) => blog.id === slug);
   return (
     <div className="p-8">
       <h1 className="text-5xl">{title}</h1>
       <h5 className="text-xl">{body}</h5>
-      <button className="bg-green-400 px-6 py-2">
-       Click special 
-      </button>
+      <button className="bg-green-400 px-6 py-2">Click special</button>
     </div>
   );
 };

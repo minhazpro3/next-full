@@ -8,7 +8,7 @@ const getAllPost = async () => {
 };
 const PostPage = async () => {
  const posts = await getAllPost()
-  console.log(posts);
+  
    
 
   
